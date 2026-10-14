@@ -86,6 +86,8 @@ struct MenuView: View {
             }
 
             HStack {
+                Text("Versie \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "dev")")
+                    .font(.caption2).foregroundStyle(.tertiary)
                 Spacer()
                 Button("Stoppen") { NSApp.terminate(nil) }
             }
