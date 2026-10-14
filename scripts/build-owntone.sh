@@ -17,6 +17,10 @@ cd "$ROOT/vendor"
 [ -d libinotify-kqueue ] || git clone --depth 1 https://github.com/libinotify-kqueue/libinotify-kqueue
 [ -d owntone-server ] || git clone https://github.com/owntone/owntone-server
 git -C owntone-server checkout -q "$OWNTONE_REF"
+# Eigen patches (zie ../patches), idempotent toepassen.
+for patch in "$ROOT"/patches/*.patch; do
+  git -C owntone-server apply --reverse --check "$patch" 2>/dev/null || git -C owntone-server apply "$patch"
+done
 
 # macOS heeft te oude bison/flex; die van Homebrew zijn keg-only.
 ln -sf "$B/opt/bison/bin/bison" bin/bison

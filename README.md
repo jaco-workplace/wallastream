@@ -49,4 +49,4 @@ Je hebt de Xcode Command Line Tools en Homebrew nodig.
 
 ## Licentie
 
-De eigen code valt onder MIT (zie `LICENSE`). De meegeleverde OwnTone valt onder GPL-2.0. De broncode daarvan staat op https://github.com/owntone/owntone-server.
+De eigen code valt onder MIT (zie `LICENSE`). De meegeleverde OwnTone valt onder GPL-2.0, met de kleine patches uit `patches/`. De broncode daarvan staat op https://github.com/owntone/owntone-server.

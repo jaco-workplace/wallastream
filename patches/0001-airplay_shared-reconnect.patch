@@ -1,0 +1,26 @@
+diff --git a/src/conffile.c b/src/conffile.c
+index e63f696..7c7214e 100644
+--- a/src/conffile.c
++++ b/src/conffile.c
+@@ -173,6 +173,8 @@ static cfg_opt_t sec_airplay_shared[] =
+     CFG_BOOL("uncompressed_alac", cfg_false, CFGF_NONE),
+     // HomePod OS 27 has user-agent validation, see issue #2042
+     CFG_STR("user_agent", "AirPlay/999.0.0", CFGF_NONE),
++    // Default for devices without their own "reconnect" setting (unset = per device type)
++    CFG_BOOL("reconnect", cfg_false, CFGF_NODEFAULT),
+     CFG_END()
+   };
+ 
+diff --git a/src/outputs/airplay.c b/src/outputs/airplay.c
+index 5009a89..8e32fd1 100644
+--- a/src/outputs/airplay.c
++++ b/src/outputs/airplay.c
+@@ -4102,6 +4102,8 @@ airplay_device_cb(const char *name, const char *type, const char *domain, const
+   // If the user didn't set any reconnect setting we enable for Apple TV and
+   // HomePods due to https://github.com/owntone/owntone-server/issues/734
+   cfgopt = devcfg ? cfg_getopt(devcfg, "reconnect") : NULL;
++  if (!cfgopt || cfgopt->nvalues != 1)
++    cfgopt = cfg_getopt(cfg_getsec(cfg, "airplay_shared"), "reconnect");
+   if (cfgopt && cfgopt->nvalues == 1)
+     device->resurrect = cfg_opt_getnbool(cfgopt, 0);
+   else

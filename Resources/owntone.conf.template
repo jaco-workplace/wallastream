@@ -491,3 +491,10 @@ streaming {
 	# Set the MP3 streaming bit rate (in kbps), valid options: 64 / 96 / 128 / 192 / 320
 #	bit_rate = 192
 }
+
+# Wallastream: niet automatisch opnieuw verbinden als een speaker wegvalt.
+# Anders pakken twee Wallastream-gebruikers een HomePod elke 5 s van elkaar af.
+# (Optie toegevoegd via patches/0001-airplay_shared-reconnect.patch.)
+airplay_shared {
+	reconnect = false
+}

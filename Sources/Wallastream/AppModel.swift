@@ -125,6 +125,10 @@ final class AppModel {
                 : "Dit apparaat vraagt om een wachtwoord of PIN (soms staat de PIN op het scherm van het apparaat)."
             return OutputProblem(message: message, needsPassword: true)
         }
+        if line.contains("closed RTSP") || line.contains("failed during") {
+            return OutputProblem(message: "Verbinding verbroken. Speelt iemand anders er nu op af? Met \"Opnieuw proberen\" neem je hem weer over.",
+                                 needsPassword: false)
+        }
         return OutputProblem(message: "Speelt niet af: kon geen verbinding maken.", needsPassword: false)
     }
 

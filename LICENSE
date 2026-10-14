@@ -22,7 +22,8 @@ SOFTWARE.
 
 ---
 
-Wallastream.app bevat een ongewijzigde build van OwnTone
+Wallastream.app bevat een build van OwnTone
 (https://github.com/owntone/owntone-server), uitgebracht onder de GNU General
-Public License v2. OwnTone draait als apart proces; de licentietekst staat in
-Wallastream.app/Contents/Resources/owntone/COPYING.
+Public License v2, met de kleine wijzigingen uit de map patches/ van deze
+repository (ook onder GPL v2). OwnTone draait als apart proces; de licentietekst
+staat in Wallastream.app/Contents/Resources/owntone/COPYING.
