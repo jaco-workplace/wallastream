@@ -68,6 +68,15 @@ enum AudioProcesses {
         AudioObjectAddPropertyListenerBlock(AudioObjectID(kAudioObjectSystemObject), &addr, .main) { _, _ in handler() }
     }
 
+    /// Roept `handler` aan (op de main queue) als de standaard uitvoer van de Mac verandert.
+    /// Dan verandert vaak ook de sample rate, en moet de opname opnieuw beginnen.
+    static func observeDefaultOutput(_ handler: @escaping () -> Void) {
+        var addr = AudioObjectPropertyAddress(mSelector: kAudioHardwarePropertyDefaultSystemOutputDevice,
+                                              mScope: kAudioObjectPropertyScopeGlobal,
+                                              mElement: kAudioObjectPropertyElementMain)
+        AudioObjectAddPropertyListenerBlock(AudioObjectID(kAudioObjectSystemObject), &addr, .main) { _, _ in handler() }
+    }
+
     private static func processObjects() -> [AudioObjectID] {
         var addr = AudioObjectPropertyAddress(mSelector: kAudioHardwarePropertyProcessObjectList,
                                               mScope: kAudioObjectPropertyScopeGlobal,

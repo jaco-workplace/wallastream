@@ -70,6 +70,17 @@ final class SystemAudioCapture {
         try check(AudioHardwareCreateAggregateDevice(aggDesc as CFDictionary, &agg), "Aggregate device aanmaken")
         aggregateID = agg
 
+        // De IOProc levert audio op de klok van het aggregate device (= de standaard output),
+        // niet per se op de rate van de tap. Bijv. tap 48 kHz, output 44,1 kHz. Gebruik dus die rate.
+        var nominal = Float64(0)
+        var rateSize = UInt32(MemoryLayout<Float64>.size)
+        var rateAddr = AudioObjectPropertyAddress(mSelector: kAudioDevicePropertyNominalSampleRate,
+                                                  mScope: kAudioObjectPropertyScopeGlobal,
+                                                  mElement: kAudioObjectPropertyElementMain)
+        if AudioObjectGetPropertyData(aggregateID, &rateAddr, 0, nil, &rateSize, &nominal) == noErr, nominal > 0 {
+            sampleRate = nominal
+        }
+
         let ring = self.ring
         var procID: AudioDeviceIOProcID?
         try check(AudioDeviceCreateIOProcIDWithBlock(&procID, aggregateID, nil) { _, inData, _, _, _ in

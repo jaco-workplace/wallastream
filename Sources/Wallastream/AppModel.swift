@@ -67,6 +67,12 @@ final class AppModel {
         AudioProcesses.observeChanges { [weak self] in
             MainActor.assumeIsolated { self?.refreshApps() }
         }
+        AudioProcesses.observeDefaultOutput { [weak self] in
+            MainActor.assumeIsolated {
+                guard let self, self.isStreaming else { return }
+                self.restartCapture()
+            }
+        }
 
         Task { await boot() }
     }
