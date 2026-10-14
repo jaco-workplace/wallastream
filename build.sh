@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="${0:A:h}"
 APP="$ROOT/build/Wallastream.app"
 OT="$APP/Contents/Resources/owntone"
-VERSION="${VERSION:-1.0}"
+VERSION="${VERSION:-1.1}"
 
 [ -x "$ROOT/runtime/usr/sbin/owntone" ] || { echo "OwnTone ontbreekt, draai eerst ./scripts/build-owntone.sh"; exit 1; }
 
