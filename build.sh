@@ -18,6 +18,7 @@ cp .build/release/Wallastream "$APP/Contents/MacOS/Wallastream"
 cp runtime/usr/sbin/owntone runtime/usr/lib/owntone/owntone-sqlext.so "$OT/"
 cp Resources/owntone.conf.template "$OT/"
 cp LICENSE "$APP/Contents/Resources/"
+cp Resources/AppIcon.icns "$APP/Contents/Resources/"  # opnieuw maken: zie scripts/make-icon.swift
 cp vendor/owntone-server/COPYING "$OT/COPYING"
 
 # Alle niet-systeemlibraries (Homebrew, libinotify) in de app kopiëren en de verwijzingen omzetten.
@@ -36,6 +37,7 @@ cat > "$APP/Contents/Info.plist" <<EOF
     <key>CFBundleShortVersionString</key><string>$VERSION</string>
     <key>CFBundleVersion</key><string>$VERSION</string>
     <key>LSMinimumSystemVersion</key><string>$(vtool -show-build "$OT/owntone" | awk '/minos/ {print $2; exit}')</string>
+    <key>CFBundleIconFile</key><string>AppIcon</string>
     <key>LSUIElement</key><true/>
     <key>NSAudioCaptureUsageDescription</key>
     <string>Wallastream vangt de geluidsuitvoer van je Mac op om die naar je AirPlay-speakers te sturen.</string>

@@ -1,3 +1,5 @@
+<img src="Resources/AppIcon.png" width="128" alt="Wallastream-icoon: koala met speakers als oren">
+
 # Wallastream
 
 Gratis, open-source menubalk-app voor macOS die de audio van je Mac gesynchroniseerd naar meerdere AirPlay 2-speakers tegelijk stuurt, bijvoorbeeld een HomePod mini en een set AirPlay-speakers. Je kunt alle geluid sturen of alleen gekozen apps. Meldingen en de rest blijven dan gewoon op je Mac spelen.
